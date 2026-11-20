@@ -44,5 +44,4 @@ project adheres to [Semantic Versioning](https://semver.org/).
 ## [0.1.0] — 2026-11
 
 - Initial standalone scripts (`run_simulation.py`, `run_sweep.py`) and the
-  HPR ray-casting physics developed for the 500 MHz / 1.5 GHz cavity
-  vertical-test campaign.
+  HPR ray-casting physics core.

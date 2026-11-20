@@ -8,7 +8,6 @@ for superconducting RF (SRF) cavities**
 [![CI](https://img.shields.io/github/actions/workflow/status/<org>/hpr-sim/ci.yml?branch=main&logo=github)](https://github.com/<org>/hpr-sim/actions)
 [![Python](https://img.shields.io/pypi/pyversions/hpr-sim)](https://pypi.org/project/hpr-sim)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![arXiv](https://img.shields.io/badge/DOI-Pending-lightgrey)](#citation)
 
 *Predict, before the clean-room run, whether your high-pressure rinsing
 process really cleans the inner surface of the cavity.*
@@ -47,8 +46,6 @@ python -m hpr_sim -f examples/tesla_9cell.yaml
   culling; tens of thousands of poses per minute on a laptop core.
 - **Vivid, honest visualisation** — coverage cloud maps with strict 1:1 axes,
   axial–azimuth maps, histograms; VTK export for ParaView.
-- **Benchmarked against vertical tests** (500 MHz cavity: field emission at
-  ~12.5–13.5 MV/m before HPR, gone ≥ 14 MV/m after HPR).
 
 ## Documentation
 
@@ -150,14 +147,6 @@ hpr-sim/
 
 See [CONTRIBUTING.md](CONTRIBUTING.md). Bug reports, new cavity cases,
 drag/cleaning-model improvements and CI work are all welcome.
-
-## Citation
-
-If you use `hpr-sim` in your work, please cite:
-
-> M. Liu, *Simulation-based assessment of high-pressure rinsing of
-> superconducting RF cavities, benchmarked with vertical tests*,
-> Nucl. Instrum. Methods A (submitted); code: github.com/<org>/hpr-sim · DOI: pending
 
 ## License
 

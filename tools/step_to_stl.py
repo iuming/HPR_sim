@@ -1,4 +1,10 @@
 # -*- coding: utf-8 -*-
+# Author: Ming Liu (刘铭)
+#         National Synchrotron Radiation Laboratory (NSRL),
+#         University of Science and Technology of China (USTC)
+# Contact: mliu1018@ustc.edu.cn
+# SPDX-License-Identifier: MIT
+
 """
 Python wrapper around the FreeCAD headless STEP -> STL conversion
 (`tools/convert_step_to_stl.py`).

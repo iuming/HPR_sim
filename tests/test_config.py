@@ -1,3 +1,9 @@
+# Author: Ming Liu (刘铭)
+#         National Synchrotron Radiation Laboratory (NSRL),
+#         University of Science and Technology of China (USTC)
+# Contact: mliu1018@ustc.edu.cn
+# SPDX-License-Identifier: MIT
+
 """Tests for configuration parsing / serialisation."""
 import numpy as np
 import pytest

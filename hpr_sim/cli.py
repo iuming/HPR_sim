@@ -1,11 +1,17 @@
 # -*- coding: utf-8 -*-
+# Author: Ming Liu (刘铭)
+#         National Synchrotron Radiation Laboratory (NSRL),
+#         University of Science and Technology of China (USTC)
+# Contact: mliu1018@ustc.edu.cn
+# SPDX-License-Identifier: MIT
+
 """
 Command-line entry point of the general HPR simulation package.
 
 Usage
 -----
-    python -m hpr_sim -f configs/main_cavity.yaml
-    python -m hpr_sim -f configs/template.yaml --sweep threshold,tilt --jobs 4
+    python -m hpr_sim -f examples/tesla_9cell.yaml
+    python -m hpr_sim -f examples/tesla_9cell.yaml --sweep threshold,tilt --jobs 4
     python -m hpr_sim --write-template configs/new_cavity.yaml
 
 The same functionality is available as the ``hpr-sim`` console script after
