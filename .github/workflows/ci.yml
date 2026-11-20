@@ -1,0 +1,78 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    name: pytest ${{ matrix.os }} · py${{ matrix.python }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        python: ["3.9", "3.10", "3.11", "3.12"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Install
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e . pytest
+      - name: Tests
+        run: python -m pytest tests -q
+
+  smoke:
+    name: TESLA 9-cell end-to-end (no FreeCAD required)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e . pytest
+      - name: Build coarse TESLA cavity
+        run: python tools/make_tesla_cavity.py --stl data/tesla_9cell_inner.stl --dz 4 --nphi 18
+      - name: Quick end-to-end run (coarse settings)
+        run: |
+          python - <<'EOF'
+          import yaml
+          with open('examples/tesla_9cell.yaml', encoding='utf-8') as f:
+              cfg = yaml.safe_load(f)
+          cfg["motion"]["n_recip"] = 1
+          cfg["sim"] = {**cfg["sim"], "step_rot_deg": 30.0, "dt_s": 1.0,
+                        "step_trans_mm": 10.0}
+          cfg["output"]["dir"] = "../data/outputs"
+          with open("ci_smoke.yaml", "w", encoding="utf-8") as f:
+              yaml.safe_dump(cfg, f, sort_keys=False)
+          EOF
+          python -m hpr_sim -f ci_smoke.yaml
+      - name: Verify outputs
+        run: |
+          test -f data/outputs/tesla_9cell_summary.json
+          test -f data/outputs/tesla_9cell_coverage.vtk
+          python - <<'EOF'
+          import json
+          s = json.load(open("data/outputs/tesla_9cell_summary.json"))
+          cov = s["summary"]["effective_coverage_ratio"]
+          assert 0.5 <= cov <= 1.0, cov
+          print(f"TESLA smoke OK, coverage = {cov:.3f}")
+          EOF
+
+  version:
+    name: import & version
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install .
+      - run: python -c "import hpr_sim; print(hpr_sim.__version__)"

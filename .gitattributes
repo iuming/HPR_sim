@@ -1,0 +1,8 @@
+# Normalise line endings for text files
+* text=auto eol=lf
+
+# Binary assets must never be line-translated
+*.png binary
+*.stl binary
+*.vtk binary
+*.ipynb text eol=lf

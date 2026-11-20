@@ -1,0 +1,26 @@
+# ---- Python -------------------------------------------------------------
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+build/
+dist/
+
+# ---- generated data / outputs (regenerable) -------------------------------
+data/*.stl
+data/*.step
+data/*.png
+data/outputs/
+data/_fast/
+data/_test/
+data/_t.yaml
+
+# ---- notebooks ------------------------------------------------------------
+.ipynb_checkpoints/
+
+# ---- editor / OS ----------------------------------------------------------
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+*.swp

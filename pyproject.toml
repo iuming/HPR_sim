@@ -1,0 +1,41 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "hpr-sim"
+version = "0.2.0"
+description = "General-purpose high-pressure rinsing (HPR) coverage simulation for superconducting RF cavities"
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [
+    { name = "Ming Liu", email = "mliu1018@ustc.edu.cn" },
+]
+keywords = ["SRF", "superconducting", "HPR", "cleaning", "ray-casting", "simulation"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Topic :: Scientific/Engineering :: Physics",
+]
+dependencies = [
+    "numpy>=1.22",
+    "matplotlib>=3.5",
+    "PyYAML>=5.4",
+]
+
+[project.optional-dependencies]
+step = ["freecad-cmd"]   # optional: STEP -> STL conversion (needs FreeCAD installed)
+dev = ["pytest>=7", "jupyter"]
+
+[project.scripts]
+hpr-sim = "hpr_sim.cli:main"
+
+[tool.setuptools]
+packages = ["hpr_sim"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-p no:cacheprovider"
